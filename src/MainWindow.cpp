@@ -34,14 +34,17 @@ void MainWindow::setupUI()
     selectAction->setCheckable(true);
     selectAction->setChecked(true);
     selectAction->setActionGroup(toolGroup);
+    selectAction->setShortcut(QKeySequence(Qt::Key_S));
 
     auto *pointAction = toolsToolbar->addAction(tr("Point"));
     pointAction->setCheckable(true);
     pointAction->setActionGroup(toolGroup);
+    pointAction->setShortcut(QKeySequence(Qt::Key_P));
 
     auto *viewAction = toolsToolbar->addAction(tr("View"));
     viewAction->setCheckable(true);
     viewAction->setActionGroup(toolGroup);
+    viewAction->setShortcut(QKeySequence(Qt::Key_V));
 
     // Create canvas (C)
     canvas = new Canvas(this);
