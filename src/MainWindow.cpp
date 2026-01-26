@@ -23,7 +23,8 @@ void MainWindow::setupUI()
     fileToolbar->addAction(tr("Save"));
 
     // Create tool chest toolbar (B)
-    auto *toolsToolbar = addToolBar(tr("Tools"));
+    auto *toolsToolbar = new QToolBar(tr("Tools"), this);
+    addToolBar(Qt::LeftToolBarArea, toolsToolbar);
     toolsToolbar->addAction(tr("Select"));
     toolsToolbar->addAction(tr("Point"));
     toolsToolbar->addAction(tr("View"));
