@@ -27,16 +27,16 @@ Point *Canvas::createPoint(const QPointF &position)
 
 void Canvas::deleteSelectedItems()
 {
-    QList<QGraphicsItem *> selectedItems = scene()->selectedItems();
-    for (QGraphicsItem *item : selectedItems) {
+    auto selectedItems = scene()->selectedItems();
+
+    for (auto *item : selectedItems) {
         scene()->removeItem(item);
-        Point *point = dynamic_cast<Point *>(item);
-        if (point) {
+
+        if (auto *point = dynamic_cast<Point *>(item)) {
             points.remove(point->id());
-            delete point;
-        } else {
-            delete item;
         }
+
+        delete item;
     }
 }
 

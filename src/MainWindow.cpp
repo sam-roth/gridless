@@ -22,7 +22,9 @@ void MainWindow::setupUI()
     fileToolbar->addAction(tr("New"));
     fileToolbar->addAction(tr("Open"));
     fileToolbar->addAction(tr("Save"));
+
     fileToolbar->addSeparator();
+
     auto deleteAction = fileToolbar->addAction(tr("Delete Object"));
     deleteAction->setShortcut(QKeySequence::Delete);
 
