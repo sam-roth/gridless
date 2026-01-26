@@ -4,6 +4,7 @@
 #include <QToolBar>
 #include <QDockWidget>
 #include <QAction>
+#include <QActionGroup>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), canvas(nullptr), inspector(nullptr)
@@ -25,13 +26,31 @@ void MainWindow::setupUI()
     // Create tool chest toolbar (B)
     auto *toolsToolbar = new QToolBar(tr("Tools"), this);
     addToolBar(Qt::LeftToolBarArea, toolsToolbar);
-    toolsToolbar->addAction(tr("Select"));
-    toolsToolbar->addAction(tr("Point"));
-    toolsToolbar->addAction(tr("View"));
+
+    // Create action group for mutually exclusive tool selection
+    auto *toolGroup = new QActionGroup(this);
+
+    auto *selectAction = toolsToolbar->addAction(tr("Select"));
+    selectAction->setCheckable(true);
+    selectAction->setChecked(true);
+    selectAction->setActionGroup(toolGroup);
+
+    auto *pointAction = toolsToolbar->addAction(tr("Point"));
+    pointAction->setCheckable(true);
+    pointAction->setActionGroup(toolGroup);
+
+    auto *viewAction = toolsToolbar->addAction(tr("View"));
+    viewAction->setCheckable(true);
+    viewAction->setActionGroup(toolGroup);
 
     // Create canvas (C)
     canvas = new Canvas(this);
     setCentralWidget(canvas);
+
+    // Connect tool actions
+    connect(selectAction, &QAction::triggered, this, &MainWindow::onSelectToolActivated);
+    connect(pointAction, &QAction::triggered, this, &MainWindow::onPointToolActivated);
+    connect(viewAction, &QAction::triggered, this, &MainWindow::onViewToolActivated);
 
     // Create inspector dock widget (D)
     inspector = new Inspector(this);
@@ -39,4 +58,20 @@ void MainWindow::setupUI()
     inspectorDock->setWidget(inspector);
     addDockWidget(Qt::RightDockWidgetArea, inspectorDock);
 }
+
+void MainWindow::onSelectToolActivated()
+{
+    canvas->setToolMode("Select");
+}
+
+void MainWindow::onPointToolActivated()
+{
+    canvas->setToolMode("Point");
+}
+
+void MainWindow::onViewToolActivated()
+{
+    canvas->setToolMode("View");
+}
+
 

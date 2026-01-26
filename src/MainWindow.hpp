@@ -13,6 +13,11 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void onSelectToolActivated();
+    void onPointToolActivated();
+    void onViewToolActivated();
+
 private:
     void setupUI();
 

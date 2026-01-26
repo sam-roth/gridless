@@ -13,6 +13,8 @@ set(SRC
     src/MainWindow.hpp
     src/Canvas.cpp
     src/Canvas.hpp
+    src/Point.cpp
+    src/Point.hpp
     src/Inspector.cpp
     src/Inspector.hpp
 )
