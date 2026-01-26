@@ -15,6 +15,8 @@ public:
     void setToolMode(const QString &mode);
     Point *createPoint(const QPointF &position);
 
+    void deleteSelectedItems();
+
 protected:
     void mousePressEvent(QMouseEvent *event) override;
 

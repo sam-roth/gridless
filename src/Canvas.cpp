@@ -25,6 +25,21 @@ Point *Canvas::createPoint(const QPointF &position)
     return point;
 }
 
+void Canvas::deleteSelectedItems()
+{
+    QList<QGraphicsItem *> selectedItems = scene()->selectedItems();
+    for (QGraphicsItem *item : selectedItems) {
+        scene()->removeItem(item);
+        Point *point = dynamic_cast<Point *>(item);
+        if (point) {
+            points.remove(point->id());
+            delete point;
+        } else {
+            delete item;
+        }
+    }
+}
+
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
     if (currentTool == "Point" && event->button() == Qt::LeftButton) {

@@ -22,6 +22,9 @@ void MainWindow::setupUI()
     fileToolbar->addAction(tr("New"));
     fileToolbar->addAction(tr("Open"));
     fileToolbar->addAction(tr("Save"));
+    fileToolbar->addSeparator();
+    auto deleteAction = fileToolbar->addAction(tr("Delete Object"));
+    deleteAction->setShortcut(QKeySequence::Delete);
 
     // Create tool chest toolbar (B)
     auto *toolsToolbar = new QToolBar(tr("Tools"), this);
@@ -54,6 +57,7 @@ void MainWindow::setupUI()
     connect(selectAction, &QAction::triggered, this, &MainWindow::onSelectToolActivated);
     connect(pointAction, &QAction::triggered, this, &MainWindow::onPointToolActivated);
     connect(viewAction, &QAction::triggered, this, &MainWindow::onViewToolActivated);
+    connect(deleteAction, &QAction::triggered, this, &MainWindow::onDeleteObjectTriggered);
 
     // Create inspector dock widget (D)
     inspector = new Inspector(this);
@@ -77,4 +81,7 @@ void MainWindow::onViewToolActivated()
     canvas->setToolMode("View");
 }
 
-
+void MainWindow::onDeleteObjectTriggered()
+{
+    canvas->deleteSelectedItems();
+}

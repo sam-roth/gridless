@@ -17,6 +17,7 @@ private slots:
     void onSelectToolActivated();
     void onPointToolActivated();
     void onViewToolActivated();
+    void onDeleteObjectTriggered();
 
 private:
     void setupUI();

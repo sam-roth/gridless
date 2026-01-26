@@ -2,7 +2,7 @@
 #include <QPainter>
 
 Point::Point(const QPointF &position, const QString &id, QGraphicsItem *parent)
-    : QGraphicsEllipseItem(parent), id(id)
+    : QGraphicsEllipseItem(parent), _id(id)
 {
     // Create a small circle for the point
     const qreal radius = 5.0;
