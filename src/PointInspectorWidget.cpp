@@ -1,14 +1,16 @@
 #include "PointInspectorWidget.hpp"
+#include "Canvas.hpp"
 #include "Point.hpp"
 #include "UpdatePointCommand.hpp"
+
+#include <QDoubleSpinBox>
 #include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
-#include <QDoubleSpinBox>
 #include <QUndoStack>
 
-PointInspectorWidget::PointInspectorWidget(QUndoStack *undoStack, QWidget *parent)
-    : InspectorWidget(parent), undoStack(undoStack), point(nullptr), updating(false)
+PointInspectorWidget::PointInspectorWidget(Canvas *canvas, QUndoStack *undoStack, QWidget *parent)
+    : InspectorWidget(parent), canvas(canvas), undoStack(undoStack), point(nullptr), updating(false)
 {
     auto *layout = new QFormLayout(this);
 
@@ -55,6 +57,8 @@ void PointInspectorWidget::updateUI()
 {
     updating = true;
 
+    idEdit->setStyleSheet(""); // Reset style
+
     if (point) {
         idEdit->setText(point->getId());
         idEdit->setEnabled(true);
@@ -64,6 +68,7 @@ void PointInspectorWidget::updateUI()
         ySpinBox->setValue(pos.y());
         xSpinBox->setEnabled(true);
         ySpinBox->setEnabled(true);
+        // validator->point = point;
     } else {
         clear();
     }
@@ -80,7 +85,12 @@ void PointInspectorWidget::onChanged()
     QPointF newPos(xSpinBox->value(), ySpinBox->value());
     QString newId = idEdit->text();
 
-    undoStack->push(new UpdatePointCommand(point, newId, newPos));
+    if (!canvas->canSetPointId(point, newId)) {
+        idEdit->setStyleSheet("QLineEdit { background-color: #ff9999; }");
+        idEdit->setToolTip(tr("ID already in use"));
+        return;
+    }
+
+    undoStack->push(new UpdatePointCommand(canvas, point, newId, newPos));
     updateUI();
 }
-

@@ -4,13 +4,11 @@
 #include <QWidget>
 
 class QGraphicsItem;
-class InspectorWidget;
 class QUndoStack;
 
-class InspectorWidgetFactory
-{
-public:
-    static InspectorWidget *create(QGraphicsItem *item, QUndoStack *undoStack, QWidget *parent = nullptr);
-};
+class Canvas;
+class InspectorWidget;
+
+InspectorWidget *createInspectorWidget(QGraphicsItem *item, Canvas *canvas, QUndoStack *undoStack, QWidget *parent = nullptr);
 
 #endif // INSPECTORWIDGETFACTORY_HPP

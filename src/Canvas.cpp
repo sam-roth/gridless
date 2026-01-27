@@ -60,6 +60,29 @@ void Canvas::deleteSelectedItems()
     }
 }
 
+bool Canvas::canSetPointId(Point *point, const QString &newId) const
+{
+    if (point->getId() == newId) {
+        return true; // No change needed
+    }
+
+    return !points.contains(newId);
+}
+
+void Canvas::setPointId(Point *point, const QString &newId)
+{
+    if (point->_id == newId) {
+        // ID is the same, no change needed
+        return;
+    }
+
+    Q_ASSERT(!points.contains(newId));
+
+    points.remove(point->getId());
+    point->_id = newId;
+    points.insert(newId, point);
+}
+
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
     if (currentTool == "Point" && event->button() == Qt::LeftButton) {

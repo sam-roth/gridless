@@ -7,12 +7,12 @@
 
 class Point : public QGraphicsEllipseItem
 {
+    friend class Canvas;
 public:
     explicit Point(const QPointF &position, const QString &id, QGraphicsItem *parent = nullptr);
 
     const QString &getId() const { return _id; }
     const QString &id() const { return _id; }
-    void setId(const QString &id) { _id = id; }
 
 private:
     QString _id;

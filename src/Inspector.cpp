@@ -5,8 +5,8 @@
 #include <QLabel>
 #include <QUndoStack>
 
-Inspector::Inspector(QUndoStack *undoStack, QWidget *parent)
-    : QWidget(parent), undoStack(undoStack), currentInspectorWidget(nullptr)
+Inspector::Inspector(Canvas *canvas, QUndoStack *undoStack, QWidget *parent)
+    : QWidget(parent), canvas(canvas), undoStack(undoStack), currentInspectorWidget(nullptr)
 {
     auto *layout = new QVBoxLayout(this);
 
@@ -34,7 +34,7 @@ void Inspector::setSelectedObject(QGraphicsItem *item)
     }
 
     // Create new widget based on item type
-    currentInspectorWidget = InspectorWidgetFactory::create(item, undoStack, this);
+    currentInspectorWidget = createInspectorWidget(item, canvas, undoStack, this);
 
     auto *layout = qobject_cast<QVBoxLayout *>(this->layout());
     if (layout) {

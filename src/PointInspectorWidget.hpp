@@ -5,14 +5,16 @@
 
 class QLineEdit;
 class QDoubleSpinBox;
-class Point;
 class QUndoStack;
+
+class Canvas;
+class Point;
 
 class PointInspectorWidget : public InspectorWidget
 {
     Q_OBJECT
 public:
-    explicit PointInspectorWidget(QUndoStack *undoStack, QWidget *parent = nullptr);
+    explicit PointInspectorWidget(Canvas *canvas, QUndoStack *undoStack, QWidget *parent = nullptr);
 
     void setObject(QGraphicsItem *item) override;
     void clear() override;
@@ -23,6 +25,7 @@ private slots:
 private:
     void updateUI();
 
+    Canvas *canvas;
     QUndoStack *undoStack;
     Point *point;
     QLineEdit *idEdit;

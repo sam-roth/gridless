@@ -1,8 +1,10 @@
 #include "UpdatePointCommand.hpp"
+#include "Canvas.hpp"
 #include "Point.hpp"
 
-UpdatePointCommand::UpdatePointCommand(Point *point, const QString &newId, const QPointF &newPosition)
+UpdatePointCommand::UpdatePointCommand(Canvas *canvas, Point *point, const QString &newId, const QPointF &newPosition)
     : QUndoCommand("Update Point"),
+      canvas(canvas),
       point(point),
       oldId(point->getId()),
       newId(newId),
@@ -13,12 +15,12 @@ UpdatePointCommand::UpdatePointCommand(Point *point, const QString &newId, const
 
 void UpdatePointCommand::undo()
 {
-    point->setId(oldId);
+    canvas->setPointId(point, oldId);
     point->setPos(oldPosition);
 }
 
 void UpdatePointCommand::redo()
 {
-    point->setId(newId);
+    canvas->setPointId(point, newId);
     point->setPos(newPosition);
 }

@@ -3,10 +3,10 @@
 #include "PointInspectorWidget.hpp"
 #include "Point.hpp"
 
-InspectorWidget *InspectorWidgetFactory::create(QGraphicsItem *item, QUndoStack *undoStack, QWidget *parent)
+InspectorWidget *createInspectorWidget(QGraphicsItem *item, Canvas *canvas, QUndoStack *undoStack, QWidget *parent)
 {
     if (dynamic_cast<Point *>(item)) {
-        auto *widget = new PointInspectorWidget(undoStack, parent);
+        auto *widget = new PointInspectorWidget(canvas, undoStack, parent);
         widget->setObject(item);
         return widget;
     }

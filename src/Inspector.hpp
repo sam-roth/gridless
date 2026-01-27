@@ -4,19 +4,22 @@
 #include <QWidget>
 
 class QGraphicsItem;
-class InspectorWidget;
 class QUndoStack;
+
+class Canvas;
+class InspectorWidget;
 
 class Inspector : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Inspector(QUndoStack *undoStack, QWidget *parent = nullptr);
+    explicit Inspector(Canvas *canvas, QUndoStack *undoStack, QWidget *parent = nullptr);
 
 public slots:
     void setSelectedObject(QGraphicsItem *item);
 
 private:
+    Canvas *canvas;
     QUndoStack *undoStack;
     InspectorWidget *currentInspectorWidget;
 };

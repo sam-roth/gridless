@@ -77,7 +77,7 @@ void MainWindow::setupUI()
     connect(deleteAction, &QAction::triggered, this, &MainWindow::onDeleteObjectTriggered);
 
     // Create inspector dock widget (D)
-    inspector = new Inspector(undoStack, this);
+    inspector = new Inspector(canvas, undoStack, this);
     auto *inspectorDock = new QDockWidget(tr("Inspector"), this);
     inspectorDock->setWidget(inspector);
     addDockWidget(Qt::RightDockWidgetArea, inspectorDock);

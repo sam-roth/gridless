@@ -21,6 +21,9 @@ public:
 
     void deleteSelectedItems();
 
+    bool canSetPointId(Point *point, const QString &newId) const;
+    void setPointId(Point *point, const QString &newId);
+
 signals:
     void selectionChanged(QGraphicsItem *item);
 

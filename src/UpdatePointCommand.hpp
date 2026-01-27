@@ -5,17 +5,19 @@
 #include <QString>
 #include <QPointF>
 
+class Canvas;
 class Point;
 
 class UpdatePointCommand : public QUndoCommand
 {
 public:
-    UpdatePointCommand(Point *point, const QString &newId, const QPointF &newPosition);
+    UpdatePointCommand(Canvas *canvas, Point *point, const QString &newId, const QPointF &newPosition);
 
     void undo() override;
     void redo() override;
 
 private:
+    Canvas *canvas;
     Point *point;
     QString oldId;
     QString newId;
