@@ -15,6 +15,8 @@ set(SRC
     src/Canvas.hpp
     src/Point.cpp
     src/Point.hpp
+    src/CreatePointCommand.cpp
+    src/CreatePointCommand.hpp
     src/Inspector.cpp
     src/Inspector.hpp
 )

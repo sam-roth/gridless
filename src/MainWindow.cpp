@@ -5,9 +5,11 @@
 #include <QDockWidget>
 #include <QAction>
 #include <QActionGroup>
+#include <QUndoStack>
+#include <QUndoView>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), canvas(nullptr), inspector(nullptr)
+    : QMainWindow(parent), canvas(nullptr), inspector(nullptr), undoStack(nullptr)
 {
     setupUI();
     resize(1024, 768);
@@ -17,11 +19,24 @@ MainWindow::~MainWindow() = default;
 
 void MainWindow::setupUI()
 {
+    // Create undo stack
+    undoStack = new QUndoStack(this);
+
     // Create file toolbar (A)
     auto *fileToolbar = addToolBar(tr("File"));
     fileToolbar->addAction(tr("New"));
     fileToolbar->addAction(tr("Open"));
     fileToolbar->addAction(tr("Save"));
+
+    fileToolbar->addSeparator();
+
+    auto *undoAction = undoStack->createUndoAction(this, tr("Undo"));
+    undoAction->setShortcut(QKeySequence::Undo);
+    fileToolbar->addAction(undoAction);
+
+    auto *redoAction = undoStack->createRedoAction(this, tr("Redo"));
+    redoAction->setShortcut(QKeySequence::Redo);
+    fileToolbar->addAction(redoAction);
 
     fileToolbar->addSeparator();
 
@@ -52,7 +67,7 @@ void MainWindow::setupUI()
     viewAction->setShortcut(QKeySequence(Qt::Key_V));
 
     // Create canvas (C)
-    canvas = new Canvas(this);
+    canvas = new Canvas(undoStack, this);
     setCentralWidget(canvas);
 
     // Connect tool actions
@@ -87,3 +102,4 @@ void MainWindow::onDeleteObjectTriggered()
 {
     canvas->deleteSelectedItems();
 }
+

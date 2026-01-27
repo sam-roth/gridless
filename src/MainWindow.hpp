@@ -5,6 +5,7 @@
 
 class Canvas;
 class Inspector;
+class QUndoStack;
 
 class MainWindow : public QMainWindow
 {
@@ -24,6 +25,7 @@ private:
 
     Canvas *canvas;
     Inspector *inspector;
+    QUndoStack *undoStack;
 };
 
 #endif // MAINWINDOW_HPP

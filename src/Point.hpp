@@ -10,6 +10,7 @@ class Point : public QGraphicsEllipseItem
 public:
     explicit Point(const QPointF &position, const QString &id, QGraphicsItem *parent = nullptr);
 
+    const QString &getId() const { return _id; }
     const QString &id() const { return _id; }
 
 private:
