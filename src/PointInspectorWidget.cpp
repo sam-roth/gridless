@@ -1,7 +1,7 @@
 #include "PointInspectorWidget.hpp"
 #include "Point.hpp"
 #include "UpdatePointCommand.hpp"
-#include <QVBoxLayout>
+#include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QDoubleSpinBox>
@@ -10,31 +10,27 @@
 PointInspectorWidget::PointInspectorWidget(QUndoStack *undoStack, QWidget *parent)
     : InspectorWidget(parent), undoStack(undoStack), point(nullptr), updating(false)
 {
-    auto *layout = qobject_cast<QVBoxLayout *>(this->layout());
+    auto *layout = new QFormLayout(this);
 
     // ID property
-    layout->addWidget(new QLabel(tr("ID:")));
     idEdit = new QLineEdit(this);
-    layout->addWidget(idEdit);
+    layout->addRow(tr("ID"), idEdit);
     connect(idEdit, &QLineEdit::editingFinished, this, &PointInspectorWidget::onIdChanged);
 
     // X position
-    layout->addWidget(new QLabel(tr("X:")));
     xSpinBox = new QDoubleSpinBox(this);
     xSpinBox->setRange(-10000, 10000);
-    layout->addWidget(xSpinBox);
+    layout->addRow(tr("X"), xSpinBox);
     connect(xSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &PointInspectorWidget::onPositionChanged);
 
     // Y position
-    layout->addWidget(new QLabel(tr("Y:")));
     ySpinBox = new QDoubleSpinBox(this);
     ySpinBox->setRange(-10000, 10000);
-    layout->addWidget(ySpinBox);
+    layout->addRow(tr("Y"), ySpinBox);
     connect(ySpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, &PointInspectorWidget::onPositionChanged);
 
-    layout->addStretch();
     setLayout(layout);
 }
 
