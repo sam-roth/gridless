@@ -43,6 +43,9 @@ qt_add_resources(gridless "resources"
     icons/undo.png
     icons/redo.png
     icons/delete.png
+    icons/save.png
+    icons/open.png
+    icons/new.png
 )
 
 target_include_directories(gridless PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)

@@ -24,9 +24,19 @@ void MainWindow::setupUI()
 
     // Create file toolbar (A)
     auto *fileToolbar = addToolBar(tr("File"));
-    fileToolbar->addAction(tr("New"));
-    fileToolbar->addAction(tr("Open"));
-    fileToolbar->addAction(tr("Save"));
+    auto *newAction = fileToolbar->addAction(tr("New"));
+    newAction->setShortcut(QKeySequence::New);
+    newAction->setIcon(QIcon(":/icons/new.png"));
+
+    auto *openAction = fileToolbar->addAction(tr("Open"));
+    openAction->setShortcut(QKeySequence::Open);
+    openAction->setIcon(QIcon(":/icons/open.png"));
+
+
+    auto *saveAction = fileToolbar->addAction(tr("Save"));
+    saveAction->setShortcut(QKeySequence::Save);
+    saveAction->setIcon(QIcon(":/icons/save.png"));
+
 
     fileToolbar->addSeparator();
 
