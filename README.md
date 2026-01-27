@@ -40,7 +40,7 @@ All object IDs are exposed in the global namespace as instances of a subtype of 
 
 Views expand to fit their contents, regardless of direction, but they have an origin point that remains stationary. This point shows up when the view is selected in the UI.
 
-Formulas are supposed to be pure functions, although this isn't enforced.
+Formulas are supposed to be pure functions, although this isn't enforced. In the context of Gridless, this means they don't mutate the document. They still can produce their outputs via a transiently-impure API, but this impurity doesn't escape the formula, and the formula can be run multiple times producing the same result each time.
 
 ### Example
 
