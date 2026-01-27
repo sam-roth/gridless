@@ -31,7 +31,19 @@ set(SRC
     src/InspectorWidgetFactory.hpp
 )
 
+
 add_executable(gridless ${SRC})
+
+qt_add_resources(gridless "resources"
+    PREFIX "/"
+    FILES
+    icons/select.png
+    icons/point.png
+    icons/view.png
+    icons/undo.png
+    icons/redo.png
+    icons/delete.png
+)
 
 target_include_directories(gridless PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_link_libraries(gridless PRIVATE Qt6::Widgets)

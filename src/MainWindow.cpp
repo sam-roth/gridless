@@ -32,16 +32,19 @@ void MainWindow::setupUI()
 
     auto *undoAction = undoStack->createUndoAction(this, tr("Undo"));
     undoAction->setShortcut(QKeySequence::Undo);
+    undoAction->setIcon(QIcon(":/icons/undo.png"));
     fileToolbar->addAction(undoAction);
 
     auto *redoAction = undoStack->createRedoAction(this, tr("Redo"));
     redoAction->setShortcut(QKeySequence::Redo);
+    redoAction->setIcon(QIcon(":/icons/redo.png"));
     fileToolbar->addAction(redoAction);
 
     fileToolbar->addSeparator();
 
     auto deleteAction = fileToolbar->addAction(tr("Delete Object"));
     deleteAction->setShortcut(QKeySequence::Delete);
+    deleteAction->setIcon(QIcon(":/icons/delete.png"));
 
     // Create tool chest toolbar (B)
     auto *toolsToolbar = new QToolBar(tr("Tools"), this);
@@ -55,16 +58,19 @@ void MainWindow::setupUI()
     selectAction->setChecked(true);
     selectAction->setActionGroup(toolGroup);
     selectAction->setShortcut(QKeySequence(Qt::Key_S));
+    selectAction->setIcon(QIcon(":/icons/select.png"));
 
     auto *pointAction = toolsToolbar->addAction(tr("Point"));
     pointAction->setCheckable(true);
     pointAction->setActionGroup(toolGroup);
     pointAction->setShortcut(QKeySequence(Qt::Key_P));
+    pointAction->setIcon(QIcon(":/icons/point.png"));
 
     auto *viewAction = toolsToolbar->addAction(tr("View"));
     viewAction->setCheckable(true);
     viewAction->setActionGroup(toolGroup);
     viewAction->setShortcut(QKeySequence(Qt::Key_V));
+    viewAction->setIcon(QIcon(":/icons/view.png"));
 
     // Create canvas (C)
     canvas = new Canvas(undoStack, this);
