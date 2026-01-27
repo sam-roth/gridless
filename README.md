@@ -2,6 +2,8 @@
 
 > [!WARNING]
 > Gridless is very much a work in progress. It should not be used for anything at this point because it lacks even basic functionality like saving files.
+>
+> **This project is not accepting pull requests at this time. Any external PRs will closed.**
 
 Gridless is an interactive programming environment similar in concept to a spreadsheet, but with a radically different purpose and user interface. Gridless is designed to work with graphics, rather than tabular data.
 
