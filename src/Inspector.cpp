@@ -10,12 +10,6 @@ Inspector::Inspector(Canvas *canvas, QUndoStack *undoStack, QWidget *parent)
 {
     auto *layout = new QVBoxLayout(this);
 
-    auto *titleLabel = new QLabel(tr("Inspector"), this);
-    auto font = titleLabel->font();
-    font.setBold(true);
-    titleLabel->setFont(font);
-    layout->addWidget(titleLabel);
-
     // Create a default empty inspector widget
     currentInspectorWidget = new InspectorWidget(this);
     layout->addWidget(currentInspectorWidget);
@@ -42,12 +36,6 @@ void Inspector::setSelectedObject(QGraphicsItem *item)
         while (layout->count() > 0) {
             layout->takeAt(0);
         }
-
-        auto *titleLabel = new QLabel(tr("Inspector"), this);
-        auto font = titleLabel->font();
-        font.setBold(true);
-        titleLabel->setFont(font);
-        layout->addWidget(titleLabel);
 
         layout->addWidget(currentInspectorWidget);
         layout->addStretch();
