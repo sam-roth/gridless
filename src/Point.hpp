@@ -12,6 +12,7 @@ public:
 
     const QString &getId() const { return _id; }
     const QString &id() const { return _id; }
+    void setId(const QString &id) { _id = id; }
 
 private:
     QString _id;

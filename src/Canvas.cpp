@@ -71,6 +71,22 @@ void Canvas::mousePressEvent(QMouseEvent *event)
     QGraphicsView::mousePressEvent(event);
 }
 
+void Canvas::mouseReleaseEvent(QMouseEvent *event)
+{
+    QGraphicsView::mouseReleaseEvent(event);
+    notifySelectionChanged();
+}
+
+void Canvas::notifySelectionChanged()
+{
+    auto selectedItems = scene()->selectedItems();
+    if (selectedItems.isEmpty()) {
+        emit selectionChanged(nullptr);
+    } else {
+        emit selectionChanged(selectedItems.first());
+    }
+}
+
 QString Canvas::generatePointId()
 {
     ++pointCounter;

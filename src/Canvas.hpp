@@ -3,6 +3,7 @@
 
 #include <QGraphicsView>
 #include <QMap>
+#include <QGraphicsItem>
 
 class Point;
 class QUndoStack;
@@ -20,10 +21,16 @@ public:
 
     void deleteSelectedItems();
 
+signals:
+    void selectionChanged(QGraphicsItem *item);
+
 protected:
     void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
+    void notifySelectionChanged();
+
     QUndoStack *undoStack;
     QString currentTool;
     int pointCounter;

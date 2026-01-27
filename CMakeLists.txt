@@ -19,8 +19,16 @@ set(SRC
     src/CreatePointCommand.hpp
     src/DeletePointsCommand.cpp
     src/DeletePointsCommand.hpp
+    src/UpdatePointCommand.cpp
+    src/UpdatePointCommand.hpp
     src/Inspector.cpp
     src/Inspector.hpp
+    src/InspectorWidget.cpp
+    src/InspectorWidget.hpp
+    src/PointInspectorWidget.cpp
+    src/PointInspectorWidget.hpp
+    src/InspectorWidgetFactory.cpp
+    src/InspectorWidgetFactory.hpp
 )
 
 add_executable(gridless ${SRC})

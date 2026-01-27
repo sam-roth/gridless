@@ -77,10 +77,13 @@ void MainWindow::setupUI()
     connect(deleteAction, &QAction::triggered, this, &MainWindow::onDeleteObjectTriggered);
 
     // Create inspector dock widget (D)
-    inspector = new Inspector(this);
+    inspector = new Inspector(undoStack, this);
     auto *inspectorDock = new QDockWidget(tr("Inspector"), this);
     inspectorDock->setWidget(inspector);
     addDockWidget(Qt::RightDockWidgetArea, inspectorDock);
+
+    // Connect canvas selection to inspector
+    connect(canvas, &Canvas::selectionChanged, inspector, &Inspector::setSelectedObject);
 }
 
 void MainWindow::onSelectToolActivated()
