@@ -15,21 +15,21 @@ PointInspectorWidget::PointInspectorWidget(QUndoStack *undoStack, QWidget *paren
     // ID property
     idEdit = new QLineEdit(this);
     layout->addRow(tr("ID"), idEdit);
-    connect(idEdit, &QLineEdit::editingFinished, this, &PointInspectorWidget::onIdChanged);
+    connect(idEdit, &QLineEdit::editingFinished, this, &PointInspectorWidget::onChanged);
 
     // X position
     xSpinBox = new QDoubleSpinBox(this);
     xSpinBox->setRange(-10000, 10000);
     layout->addRow(tr("X"), xSpinBox);
     connect(xSpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PointInspectorWidget::onPositionChanged);
+            this, &PointInspectorWidget::onChanged);
 
     // Y position
     ySpinBox = new QDoubleSpinBox(this);
     ySpinBox->setRange(-10000, 10000);
     layout->addRow(tr("Y"), ySpinBox);
     connect(ySpinBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PointInspectorWidget::onPositionChanged);
+            this, &PointInspectorWidget::onChanged);
 
     setLayout(layout);
 }
@@ -71,28 +71,16 @@ void PointInspectorWidget::updateUI()
     updating = false;
 }
 
-void PointInspectorWidget::onIdChanged()
-{
-    if (!point || updating) {
-        return;
-    }
-
-    QString newId = idEdit->text();
-    if (newId != point->getId()) {
-        undoStack->push(new UpdatePointCommand(point, newId, point->pos()));
-        updateUI();
-    }
-}
-
-void PointInspectorWidget::onPositionChanged()
+void PointInspectorWidget::onChanged()
 {
     if (!point || updating) {
         return;
     }
 
     QPointF newPos(xSpinBox->value(), ySpinBox->value());
-    if (newPos != point->pos()) {
-        undoStack->push(new UpdatePointCommand(point, point->getId(), newPos));
-        updateUI();
-    }
+    QString newId = idEdit->text();
+
+    undoStack->push(new UpdatePointCommand(point, newId, newPos));
+    updateUI();
 }
+

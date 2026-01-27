@@ -18,8 +18,7 @@ public:
     void clear() override;
 
 private slots:
-    void onIdChanged();
-    void onPositionChanged();
+    void onChanged();
 
 private:
     void updateUI();
