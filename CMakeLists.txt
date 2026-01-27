@@ -17,6 +17,8 @@ set(SRC
     src/Point.hpp
     src/CreatePointCommand.cpp
     src/CreatePointCommand.hpp
+    src/DeletePointsCommand.cpp
+    src/DeletePointsCommand.hpp
     src/Inspector.cpp
     src/Inspector.hpp
 )

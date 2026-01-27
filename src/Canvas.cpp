@@ -1,6 +1,7 @@
 #include "Canvas.hpp"
 #include "Point.hpp"
 #include "CreatePointCommand.hpp"
+#include "DeletePointsCommand.hpp"
 #include <QGraphicsScene>
 #include <QMouseEvent>
 #include <QUndoStack>
@@ -31,7 +32,6 @@ void Canvas::removePoint(Point *point)
 {
     scene()->removeItem(point);
     points.remove(point->getId());
-    delete point;
 }
 
 void Canvas::addPoint(Point *point)
@@ -44,14 +44,19 @@ void Canvas::deleteSelectedItems()
 {
     auto selectedItems = scene()->selectedItems();
 
+    if (selectedItems.isEmpty()) {
+        return;
+    }
+
+    QList<Point *> pointsToDelete;
     for (auto *item : selectedItems) {
-        scene()->removeItem(item);
-
         if (auto *point = dynamic_cast<Point *>(item)) {
-            points.remove(point->getId());
+            pointsToDelete.append(point);
         }
+    }
 
-        delete item;
+    if (!pointsToDelete.isEmpty()) {
+        undoStack->push(new DeletePointsCommand(this, pointsToDelete));
     }
 }
 
