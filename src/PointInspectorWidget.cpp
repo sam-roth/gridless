@@ -60,7 +60,7 @@ void PointInspectorWidget::updateUI()
     idEdit->setStyleSheet(""); // Reset style
 
     if (point) {
-        idEdit->setText(point->getId());
+        idEdit->setText(point->id());
         idEdit->setEnabled(true);
 
         QPointF pos = point->pos();

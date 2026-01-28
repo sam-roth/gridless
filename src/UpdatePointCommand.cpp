@@ -6,7 +6,7 @@ UpdatePointCommand::UpdatePointCommand(Canvas *canvas, Point *point, const QStri
     : QUndoCommand("Update Point"),
       canvas(canvas),
       point(point),
-      oldId(point->getId()),
+      oldId(point->id()),
       newId(newId),
       oldPosition(point->pos()),
       newPosition(newPosition)

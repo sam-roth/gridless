@@ -12,6 +12,7 @@ Canvas::Canvas(QUndoStack *undoStack, QWidget *parent)
     auto *scene = new QGraphicsScene(this);
     setScene(scene);
     setBackgroundBrush(Qt::white);
+    setRenderHint(QPainter::Antialiasing, true);
 }
 
 void Canvas::setToolMode(const QString &mode)
@@ -31,13 +32,13 @@ Point *Canvas::createPoint(const QPointF &position)
 void Canvas::removePoint(Point *point)
 {
     scene()->removeItem(point);
-    points.remove(point->getId());
+    points.remove(point->id());
 }
 
 void Canvas::addPoint(Point *point)
 {
     scene()->addItem(point);
-    points.insert(point->getId(), point);
+    points.insert(point->id(), point);
 }
 
 void Canvas::deleteSelectedItems()
@@ -62,7 +63,7 @@ void Canvas::deleteSelectedItems()
 
 bool Canvas::canSetPointId(Point *point, const QString &newId) const
 {
-    if (point->getId() == newId) {
+    if (point->id() == newId) {
         return true; // No change needed
     }
 
@@ -78,7 +79,7 @@ void Canvas::setPointId(Point *point, const QString &newId)
 
     Q_ASSERT(!points.contains(newId));
 
-    points.remove(point->getId());
+    points.remove(point->id());
     point->_id = newId;
     points.insert(newId, point);
 }
