@@ -27,7 +27,7 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="8.9261576"
-     inkscape:cx="152.64127"
+     inkscape:cx="152.7533"
      inkscape:cy="70.859157"
      inkscape:window-width="3736"
      inkscape:window-height="2112"
@@ -147,17 +147,17 @@
          inkscape:path-effect="#path-effect25"
          sodipodi:type="rect"
          d="m 62.655481,75.322456 h 13.416207 a 2.1166666,2.1166666 45 0 1 2.116666,2.116667 v 8.791349 H 60.538815 v -8.791349 a 2.1166666,2.1166666 135 0 1 2.116666,-2.116667 z"
-         transform="rotate(180,69.363584,71.230465)" />
+         transform="matrix(1,0,0,-1,-1.0368652e-6,142.46093)" />
       <rect
          style="font-variation-settings:'wght' 463;fill:#008080;stroke:#000000;stroke-width:1.38744;stroke-linecap:square;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
          id="rect26"
          width="2.970823"
          height="5.8910742"
-         x="-67.122307"
+         x="71.604858"
          y="-64.728539"
          rx="0"
          ry="0"
-         transform="scale(-1)" />
+         transform="scale(1,-1)" />
       <path
          style="font-variation-settings:'wght' 463;fill:#ffffff;stroke:#000000;stroke-width:1.02434;stroke-linecap:square;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
          id="path27"
