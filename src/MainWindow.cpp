@@ -96,6 +96,7 @@ void MainWindow::setupUI()
     inspector = new Inspector(canvas, undoStack, this);
     auto *inspectorDock = new QDockWidget(tr("Inspector"), this);
     inspectorDock->setWidget(inspector);
+    inspectorDock->setFeatures(inspectorDock->features() & ~QDockWidget::DockWidgetClosable);
     addDockWidget(Qt::RightDockWidgetArea, inspectorDock);
 
     // Connect canvas selection to inspector

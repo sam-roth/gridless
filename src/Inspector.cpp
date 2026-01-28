@@ -10,6 +10,8 @@ Inspector::Inspector(Canvas *canvas, QUndoStack *undoStack, QWidget *parent)
 {
     auto *layout = new QVBoxLayout(this);
 
+    this->setMinimumWidth(250);
+
     // Create a default empty inspector widget
     currentInspectorWidget = new InspectorWidget(this);
     layout->addWidget(currentInspectorWidget);
@@ -17,7 +19,6 @@ Inspector::Inspector(Canvas *canvas, QUndoStack *undoStack, QWidget *parent)
     layout->addStretch();
 
     setLayout(layout);
-    setMaximumWidth(250);
 }
 
 void Inspector::setSelectedObject(QGraphicsItem *item)
