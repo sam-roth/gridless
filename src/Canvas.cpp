@@ -92,12 +92,15 @@ void Canvas::mousePressEvent(QMouseEvent *event)
     }
 
     QGraphicsView::mousePressEvent(event);
+
+    notifySelectionChanged();
 }
 
 void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
-    QGraphicsView::mouseReleaseEvent(event);
+    // Ensure position of item is correct in the inspector after move.
     notifySelectionChanged();
+    QGraphicsView::mouseReleaseEvent(event);
 }
 
 void Canvas::notifySelectionChanged()
