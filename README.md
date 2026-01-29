@@ -19,7 +19,7 @@ Every object has an ID that can be referenced by formulas. Each object ID must b
 
 ### Drawing API
 
-While formulas are written in plain Julia, I will use Julia-style notation to describe the API. For this minimal proof-of-concept version, the API is very simple.
+Formulas are written in plain Julia. For this minimal proof-of-concept version, the API is very simple.
 
 ```julia
 # Points are relative to the position of the view. The coordinate system grows down and to the right. Negative coordinates are valid.
