@@ -13,30 +13,34 @@ The central component of the user interface is a freeform canvas (based on QGrap
 For now, only two object types can be placed on the canvas:
 
 - Point: Points mark positions on the canvas.
-- View: Views provide a space for a formula written in JavaScript to draw on the canvas. The user only directly controls the position of the view. The size of the view depends on the content.
+- View: Views provide a space for a formula written in Julia to draw on the canvas. The user only directly controls the position of the view. The size of the view depends on the content.
 
-Every object has an ID that can be referenced by formulas. Each object ID must be a valid JavaScript identifier beginning with `$`. A default ID is generated, but can be changed by the user. Default IDs are compact. For instance the first Point object has the ID `$p1`, second has the ID `$p2`, and so on. Formulas are evaluated using `QJSEngine`.
+Every object has an ID that can be referenced by formulas. Each object ID must be a valid Julia identifier. A default ID is generated, but can be changed by the user. Default IDs are compact. For instance the first Point object has the ID `p1`, second has the ID `p2`, and so on. Formulas are evaluated using Julia's runtime.
 
 ### Drawing API
 
-While formulas are written in plain JavaScript, I will use a TypeScript-style notation to describe the API. For this minimal proof-of-concept version, the API is very simple.
+While formulas are written in plain Julia, I will use Julia-style notation to describe the API. For this minimal proof-of-concept version, the API is very simple.
 
-```typescript
-// Points are relative to the position of the view. The coordinate system grows down and to the right. Negative coordinates are valid.
-type Point = [number, number];
+```julia
+# Points are relative to the position of the view. The coordinate system grows down and to the right. Negative coordinates are valid.
+const Point = Tuple{Real, Real}
 
-declare function line(p1: Point, p2: Point): void;
+function line(p1::Point, p2::Point)::Nothing
+end
 
-interface Obj {
-    // Returns the point relative to the current view. The result changes depending on which formula is referencing the point.
-    pos(): Point;
-}
+abstract type Obj end
 
-// For now, these subtypes do not add much, but this will change.
-interface OPoint extends Obj { }
-interface OView extends Obj {
-    formula: string;
-}
+# Returns the point relative to the current view. The result changes depending on which formula is referencing the point.
+function pos(obj::Obj)::Point
+end
+
+# For now, these subtypes do not add much, but this will change.
+struct OPoint <: Obj
+end
+
+struct OView <: Obj
+    formula::String
+end
 ```
 
 All object IDs are exposed in the global namespace as instances of a subtype of `Obj`.
@@ -51,8 +55,8 @@ As it stands, Gridless isn't useful for much, so let's just draw a line with it.
 
 We now create a view object. We can position this view anywhere on the canvas. It doesn't matter where we put it. The line will always be drawn in the same place because we're referencing point objects instead of hardcoded coordinates. We assign the view the following formula:
 
-```javascript
-line($p1.pos(), $p2.pos());
+```julia
+line(pos(p1), pos(p2))
 ```
 
 That's it!

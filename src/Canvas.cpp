@@ -117,6 +117,6 @@ void Canvas::notifySelectionChanged()
 QString Canvas::generatePointId()
 {
     ++pointCounter;
-    return "$p" + QString::number(pointCounter);
+    return "p" + QString::number(pointCounter);
 }
 
