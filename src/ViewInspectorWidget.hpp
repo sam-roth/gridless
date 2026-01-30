@@ -5,6 +5,7 @@
 
 class QLineEdit;
 class QPlainTextEdit;
+class QDoubleSpinBox;
 class QUndoStack;
 
 class Canvas;
@@ -30,6 +31,8 @@ private:
     View *view;
     QLineEdit *idEdit;
     QPlainTextEdit *formulaEdit;
+    QDoubleSpinBox *xSpinBox;
+    QDoubleSpinBox *ySpinBox;
     bool updating;
 };
 

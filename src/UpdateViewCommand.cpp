@@ -3,14 +3,16 @@
 #include "Canvas.hpp"
 #include "View.hpp"
 
-UpdateViewCommand::UpdateViewCommand(Canvas *canvas, View *view, const QString &newId, const QString &newFormula)
+UpdateViewCommand::UpdateViewCommand(Canvas *canvas, View *view, const QString &newId, const QString &newFormula, const QPointF &newPosition)
     : QUndoCommand("Update View"),
       canvas(canvas),
       view(view),
       oldId(view->id()),
       newId(newId),
       oldFormula(view->formula()),
-      newFormula(newFormula)
+      newFormula(newFormula),
+      oldPosition(view->pos()),
+      newPosition(newPosition)
 {
 }
 
@@ -30,9 +32,10 @@ bool UpdateViewCommand::mergeWith(const QUndoCommand *other)
         return false;
     }
 
-    // Merge by updating the newId and newFormula to those of the other command
+    // Merge by updating the new values to those of the other command
     newId = otherCmd->newId;
     newFormula = otherCmd->newFormula;
+    newPosition = otherCmd->newPosition;
 
     return true;
 }
@@ -41,10 +44,12 @@ void UpdateViewCommand::undo()
 {
     canvas->setViewId(view, oldId);
     view->setFormula(oldFormula);
+    view->setPos(oldPosition);
 }
 
 void UpdateViewCommand::redo()
 {
     canvas->setViewId(view, newId);
     view->setFormula(newFormula);
+    view->setPos(newPosition);
 }
