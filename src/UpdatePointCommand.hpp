@@ -13,6 +13,9 @@ class UpdatePointCommand : public QUndoCommand
 public:
     UpdatePointCommand(Canvas *canvas, Point *point, const QString &newId, const QPointF &newPosition);
 
+    int id() const override;
+    bool mergeWith(const QUndoCommand *other) override;
+
     void undo() override;
     void redo() override;
 

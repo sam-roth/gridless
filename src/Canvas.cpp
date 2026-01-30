@@ -75,6 +75,7 @@ void Canvas::deleteSelectedItems()
 
     QList<Point *> pointsToDelete;
     QList<View *> viewsToDelete;
+
     for (auto *item : selectedItems) {
         if (auto *point = dynamic_cast<Point *>(item)) {
             pointsToDelete.append(point);
@@ -83,6 +84,8 @@ void Canvas::deleteSelectedItems()
         }
     }
 
+    undoStack->beginMacro("Delete Selected Items");
+
     if (!pointsToDelete.isEmpty()) {
         undoStack->push(new DeletePointsCommand(this, pointsToDelete));
     }
@@ -90,6 +93,8 @@ void Canvas::deleteSelectedItems()
     if (!viewsToDelete.isEmpty()) {
         undoStack->push(new DeleteViewsCommand(this, viewsToDelete));
     }
+
+    undoStack->endMacro();
 }
 
 bool Canvas::canSetPointId(Point *point, const QString &newId) const

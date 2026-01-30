@@ -12,6 +12,9 @@ class UpdateViewCommand : public QUndoCommand
 public:
     UpdateViewCommand(Canvas *canvas, View *view, const QString &newId, const QString &newFormula);
 
+    int id() const override;
+    bool mergeWith(const QUndoCommand *other) override;
+
     void undo() override;
     void redo() override;
 
