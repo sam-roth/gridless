@@ -15,18 +15,28 @@ set(SRC
     src/Canvas.hpp
     src/Point.cpp
     src/Point.hpp
+    src/View.cpp
+    src/View.hpp
     src/CreatePointCommand.cpp
     src/CreatePointCommand.hpp
+    src/CreateViewCommand.cpp
+    src/CreateViewCommand.hpp
     src/DeletePointsCommand.cpp
     src/DeletePointsCommand.hpp
+    src/DeleteViewsCommand.cpp
+    src/DeleteViewsCommand.hpp
     src/UpdatePointCommand.cpp
     src/UpdatePointCommand.hpp
+    src/UpdateViewCommand.cpp
+    src/UpdateViewCommand.hpp
     src/Inspector.cpp
     src/Inspector.hpp
     src/InspectorWidget.cpp
     src/InspectorWidget.hpp
     src/PointInspectorWidget.cpp
     src/PointInspectorWidget.hpp
+    src/ViewInspectorWidget.cpp
+    src/ViewInspectorWidget.hpp
     src/InspectorWidgetFactory.cpp
     src/InspectorWidgetFactory.hpp
 )
