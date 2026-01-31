@@ -22,9 +22,12 @@ public:
 
 private slots:
     void onChanged();
+    void commitFormula();
+    void revertFormula();
 
 private:
     void updateUI();
+    void updateFormulaButtonStates();
 
     Canvas *canvas;
     QUndoStack *undoStack;
@@ -33,6 +36,9 @@ private:
     QPlainTextEdit *formulaEdit;
     QDoubleSpinBox *xSpinBox;
     QDoubleSpinBox *ySpinBox;
+    class QPushButton *commitFormulaButton;
+    class QPushButton *revertFormulaButton;
+    QString lastCommittedFormula;
     bool updating;
 };
 
